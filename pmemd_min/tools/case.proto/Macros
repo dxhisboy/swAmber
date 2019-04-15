@@ -1,0 +1,16 @@
+#-*- mode: makefile -*-
+CPPDEFS=-DMPI -DBINTRAJ -DPUBFFT -DSWLU
+INCLUDES += -I/home/export/online1/systest/swsduhpc/swlu/include/ -I/home/export/online1/swmore/release/lib
+
+NETCDF_PATH = /usr/sw-mpp/apps/bin/WRF/netcdf/
+INCLUDES += -I$(NETCDF_PATH)/include
+LIBS += -L$(NETCDF_PATH)/lib -lnetcdf -L/home/export/online1/swmore/opensource/swlu/lib -lswlu_mpi -L/home/export/online1/swmore/release/lib -lgptl -lm -lm_slave
+
+SHAREFLAGS=-OPT:IEEE_arith=2
+FC=$(CASETOOL)/sw5c/sw5c.py
+FFLAGS=-O3 -msimd $(CPPDEFS) $(INCLUDES) $(SHAREFLAGS)
+
+CC=$(CASETOOL)/sw5c/sw5c.py
+CFLAGS=-O2 -msimd $(CPPDEFS) $(INCLUDES) $(SHAREFLAGS)
+
+SWCC=$(CASETOOL)/sw5c/sw5c.py
